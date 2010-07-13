@@ -48,4 +48,250 @@ Finally, let's return to the front page of our site before continuing
     >>> browser.open(portal_url)
 
 -*- extra stuff goes here -*-
+The audio content type
+===============================
+
+In this section we are tesing the audio content type by performing
+basic operations like adding, updadating and deleting audio content
+items.
+
+Adding a new audio content item
+--------------------------------
+
+We use the 'Add new' menu to add a new content item.
+
+    >>> browser.getLink('Add new').click()
+
+Then we select the type of item we want to add. In this case we select
+'audio' and click the 'Add' button to get to the add form.
+
+    >>> browser.getControl('audio').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> 'audio' in browser.contents
+    True
+
+Now we fill the form and submit it.
+
+    >>> browser.getControl(name='title').value = 'audio Sample'
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved' in browser.contents
+    True
+
+And we are done! We added a new 'audio' content item to the portal.
+
+Updating an existing audio content item
+---------------------------------------
+
+Let's click on the 'edit' tab and update the object attribute values.
+
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl(name='title').value = 'New audio Sample'
+    >>> browser.getControl('Save').click()
+
+We check that the changes were applied.
+
+    >>> 'Changes saved' in browser.contents
+    True
+    >>> 'New audio Sample' in browser.contents
+    True
+
+Removing a/an audio content item
+--------------------------------
+
+If we go to the home page, we can see a tab with the 'New audio
+Sample' title in the global navigation tabs.
+
+    >>> browser.open(portal_url)
+    >>> 'New audio Sample' in browser.contents
+    True
+
+Now we are going to delete the 'New audio Sample' object. First we
+go to the contents tab and select the 'New audio Sample' for
+deletion.
+
+    >>> browser.getLink('Contents').click()
+    >>> browser.getControl('New audio Sample').click()
+
+We click on the 'Delete' button.
+
+    >>> browser.getControl('Delete').click()
+    >>> 'Item(s) deleted' in browser.contents
+    True
+
+So, if we go back to the home page, there is no longer a 'New audio
+Sample' tab.
+
+    >>> browser.open(portal_url)
+    >>> 'New audio Sample' in browser.contents
+    False
+
+Adding a new audio content item as contributor
+------------------------------------------------
+
+Not only site managers are allowed to add audio content items, but
+also site contributors.
+
+Let's logout and then login as 'contributor', a portal member that has the
+contributor role assigned.
+
+    >>> browser.getLink('Log out').click()
+    >>> browser.open(portal_url + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = 'contributor'
+    >>> browser.getControl(name='__ac_password').value = default_password
+    >>> browser.getControl(name='submit').click()
+    >>> browser.open(portal_url)
+
+We use the 'Add new' menu to add a new content item.
+
+    >>> browser.getLink('Add new').click()
+
+We select 'audio' and click the 'Add' button to get to the add form.
+
+    >>> browser.getControl('audio').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> 'audio' in browser.contents
+    True
+
+Now we fill the form and submit it.
+
+    >>> browser.getControl(name='title').value = 'audio Sample'
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved' in browser.contents
+    True
+
+Done! We added a new audio content item logged in as contributor.
+
+Finally, let's login back as manager.
+
+    >>> browser.getLink('Log out').click()
+    >>> browser.open(portal_url + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = portal_owner
+    >>> browser.getControl(name='__ac_password').value = default_password
+    >>> browser.getControl(name='submit').click()
+    >>> browser.open(portal_url)
+
+
+The video content type
+===============================
+
+In this section we are tesing the video content type by performing
+basic operations like adding, updadating and deleting video content
+items.
+
+Adding a new video content item
+--------------------------------
+
+We use the 'Add new' menu to add a new content item.
+
+    >>> browser.getLink('Add new').click()
+
+Then we select the type of item we want to add. In this case we select
+'video' and click the 'Add' button to get to the add form.
+
+    >>> browser.getControl('video').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> 'video' in browser.contents
+    True
+
+Now we fill the form and submit it.
+
+    >>> browser.getControl(name='title').value = 'video Sample'
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved' in browser.contents
+    True
+
+And we are done! We added a new 'video' content item to the portal.
+
+Updating an existing video content item
+---------------------------------------
+
+Let's click on the 'edit' tab and update the object attribute values.
+
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl(name='title').value = 'New video Sample'
+    >>> browser.getControl('Save').click()
+
+We check that the changes were applied.
+
+    >>> 'Changes saved' in browser.contents
+    True
+    >>> 'New video Sample' in browser.contents
+    True
+
+Removing a/an video content item
+--------------------------------
+
+If we go to the home page, we can see a tab with the 'New video
+Sample' title in the global navigation tabs.
+
+    >>> browser.open(portal_url)
+    >>> 'New video Sample' in browser.contents
+    True
+
+Now we are going to delete the 'New video Sample' object. First we
+go to the contents tab and select the 'New video Sample' for
+deletion.
+
+    >>> browser.getLink('Contents').click()
+    >>> browser.getControl('New video Sample').click()
+
+We click on the 'Delete' button.
+
+    >>> browser.getControl('Delete').click()
+    >>> 'Item(s) deleted' in browser.contents
+    True
+
+So, if we go back to the home page, there is no longer a 'New video
+Sample' tab.
+
+    >>> browser.open(portal_url)
+    >>> 'New video Sample' in browser.contents
+    False
+
+Adding a new video content item as contributor
+------------------------------------------------
+
+Not only site managers are allowed to add video content items, but
+also site contributors.
+
+Let's logout and then login as 'contributor', a portal member that has the
+contributor role assigned.
+
+    >>> browser.getLink('Log out').click()
+    >>> browser.open(portal_url + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = 'contributor'
+    >>> browser.getControl(name='__ac_password').value = default_password
+    >>> browser.getControl(name='submit').click()
+    >>> browser.open(portal_url)
+
+We use the 'Add new' menu to add a new content item.
+
+    >>> browser.getLink('Add new').click()
+
+We select 'video' and click the 'Add' button to get to the add form.
+
+    >>> browser.getControl('video').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> 'video' in browser.contents
+    True
+
+Now we fill the form and submit it.
+
+    >>> browser.getControl(name='title').value = 'video Sample'
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved' in browser.contents
+    True
+
+Done! We added a new video content item logged in as contributor.
+
+Finally, let's login back as manager.
+
+    >>> browser.getLink('Log out').click()
+    >>> browser.open(portal_url + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = portal_owner
+    >>> browser.getControl(name='__ac_password').value = default_password
+    >>> browser.getControl(name='submit').click()
+    >>> browser.open(portal_url)
+
+
 

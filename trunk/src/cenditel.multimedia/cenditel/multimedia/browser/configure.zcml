@@ -7,4 +7,24 @@
 
   <!-- -*- extra stuff goes here -*- -->
 
+  <browser:page
+      for="*"
+      name="searchaudio_view"
+      class=".searchaudioview.searchaudioView"
+      template="searchaudioview.pt"
+      allowed_interface=".searchaudioview.IsearchaudioView"
+      permission="zope.Public"
+      />
+
+
+  <browser:page
+      for="*"
+      name="searchvideo_view"
+      class=".searchvideoview.searchvideoView"
+      template="searchvideoview.pt"
+      allowed_interface=".searchvideoview.IsearchvideoView"
+      permission="zope.Public"
+      />
+
+
 </configure>
