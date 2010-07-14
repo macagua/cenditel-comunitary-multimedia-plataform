@@ -3,6 +3,6 @@ from zope.interface import Interface
 
 
 class Iaudio(Interface):
-    """It is a file of audio ti be play in the site"""
+    """It is a file of audio to be play in the site"""
 
     # -*- schema definition goes here -*-
