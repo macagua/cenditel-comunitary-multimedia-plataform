@@ -11,11 +11,32 @@ from Products.ATContentTypes.content import schemata
 
 from cenditel.multimedia.interfaces import Iaudio
 from cenditel.multimedia.config import PROJECTNAME
+# -*- Import of FileSystem Storage-*-
+#from iw.fss.FileSystemStorage import FileSystemStorage
 
 audioSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
     # -*- Your Archetypes field definitions here ... -*-
-
+   atapi.StringField("title",
+                required=True,
+                searchable=True,
+                storage=atapi.AnnotationStorage(),
+                widget=atapi.StringWidget(label=_(u"title"))
+                ),
+   atapi.TextField("description",
+                required=False,
+                searchable=True,
+                storage=atapi.AnnotationStorage(),
+                widget=atapi.RichWidget(label=_(u"description"))
+                ),
+   atapi.FileField("audio",
+                required=True,
+                searchable=False,
+                #storage=FieldSystemStorage(),
+                storage=AnnotationStorage(),
+                widget=atapi.FileWidget(label=_(u"audio"))
+                ),
+    
 ))
 
 # Set storage on fields copied from ATContentTypeSchema, making sure
@@ -28,7 +49,7 @@ schemata.finalizeATCTSchema(audioSchema, moveDiscussion=False)
 
 
 class audio(base.ATCTContent):
-    """It is a file of audio ti be play in the site"""
+    """It is a file of audio to be play in the site"""
     implements(Iaudio)
 
     meta_type = "audio"
