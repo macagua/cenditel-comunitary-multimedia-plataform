@@ -15,7 +15,25 @@ from cenditel.multimedia.config import PROJECTNAME
 videoSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
     # -*- Your Archetypes field definitions here ... -*-
-
+   atapi.StringField("title",
+                required=True,
+                searchable=True,
+                storage=atapi.AnnotationStorage(),
+                widget=atapi.StringWidget(label=_(u"title"))
+                ),
+   atapi.TextField("description",
+                required=False,
+                searchable=True,
+                storage=atapi.AnnotationStorage(),
+                widget=atapi.RichWidget(label=_(u"description"))
+                ),
+   atapi.FileField("video",
+                required=True,
+                searchable=False,
+                #storage=FieldSystemStorage(),
+                storage=AnnotationStorage(),
+                widget=atapi.FileWidget(label=_(u"audio"))
+                ),
 ))
 
 # Set storage on fields copied from ATContentTypeSchema, making sure
